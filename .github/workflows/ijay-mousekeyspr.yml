@@ -13,5 +13,5 @@ jobs:
       alphas: '["QWERTY"]'
       nav: '["vi"]'
       custom_config: '["#define MIRYOKU_KLUDGE_MOUSEKEYSPR"]'
-      kconfig: '["CONFIG_ZMK_MOUSE=y/nCONFIG_ZMK_KSCAN_DEBOUNCE_PRESS_MS=10/nCONFIG_ZMK_KSCAN_DEBOUNCE_RELEASE_MS=10"]'
+      kconfig: '["CONFIG_ZMK_MOUSE=y/nCONFIG_ZMK_KSCAN_DEBOUNCE_PRESS_MS=15/nCONFIG_ZMK_KSCAN_DEBOUNCE_RELEASE_MS=15"]'
       branches: '["petejohanson/zmk/feat/pointers-move-scroll"]'
