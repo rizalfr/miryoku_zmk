@@ -10,6 +10,8 @@ jobs:
     with:
       board: '["nice_nano_v2"]'
       shield: '["corne_left", "corne_right"]'
+      alphas: '["QWERTY"]'
+      nav: '["vi"]'
       custom_config: '["#define MIRYOKU_KLUDGE_MOUSEKEYSPR"]'
       kconfig: '["CONFIG_ZMK_MOUSE=y","CONFIG_ZMK_KSCAN_DEBOUNCE_PRESS_MS=10","CONFIG_ZMK_KSCAN_DEBOUNCE_RELEASE_MS=10"]'
       branches: '["petejohanson/zmk/feat/pointers-move-scroll","zmkfirmware/zmk/main petejohanson/zmk/feat/pointers-move-scroll"]'
