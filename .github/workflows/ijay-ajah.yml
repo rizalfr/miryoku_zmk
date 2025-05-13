@@ -1,7 +1,7 @@
 # Copyright 2024 Manna Harbour
 # https://github.com/manna-harbour/miryoku
 
-name: 'ijay mousekeyspr'
+name: 'ijay ajah'
 on: workflow_dispatch
 jobs:
   build:
