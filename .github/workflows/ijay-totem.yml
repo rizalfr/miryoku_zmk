@@ -1,0 +1,17 @@
+# Copyright 2024 Manna Harbour
+# https://github.com/manna-harbour/miryoku
+
+name: 'ijay totem'
+on: workflow_dispatch
+jobs:
+  build:
+    uses: ./.github/workflows/main.yml
+    secrets: inherit
+    with:
+      board: '["xiao_ble"]'
+      shield: '["totem_left", "totem_right"]'
+      alphas: '["QWERTY"]'
+      nav: '["vi"]'
+      custom_config: '["#define MIRYOKU_KLUDGE_MOUSEKEYSPR\n#define MIRYOKU_CLIPBOARD_FUN"]'
+      kconfig: '["CONFIG_ZMK_MOUSE=y/nCONFIG_ZMK_KSCAN_DEBOUNCE_PRESS_MS=15/nCONFIG_ZMK_KSCAN_DEBOUNCE_RELEASE_MS=15/nCONFIG_ZMK_SLEEP=y"]'
+      branches: '["petejohanson/zmk/feat/pointers-move-scroll"]'
