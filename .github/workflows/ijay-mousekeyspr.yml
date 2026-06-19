@@ -13,3 +13,4 @@ jobs:
       alphas: '["QWERTY"]'
       nav: '["vi"]'
       kconfig: '["CONFIG_ZMK_POINTING=y/nCONFIG_ZMK_KSCAN_DEBOUNCE_PRESS_MS=15/nCONFIG_ZMK_KSCAN_DEBOUNCE_RELEASE_MS=15"]'
+      branches: '["zmkfirmware/zmk/v0.3"]'

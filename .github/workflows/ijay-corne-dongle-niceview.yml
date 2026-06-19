@@ -14,6 +14,7 @@ jobs:
       nav: '["vi"]'
       custom_config: '["#define MIRYOKU_CLIPBOARD_FUN"]'
       kconfig: '["CONFIG_ZMK_POINTING=y/nCONFIG_ZMK_KSCAN_DEBOUNCE_PRESS_MS=15/nCONFIG_ZMK_KSCAN_DEBOUNCE_RELEASE_MS=15/nCONFIG_ZMK_SLEEP=y/nCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n"]'
+      branches: '["zmkfirmware/zmk/v0.3"]'
   dongle:
     uses: ./.github/workflows/main.yml
     secrets: inherit
@@ -24,3 +25,4 @@ jobs:
       nav: '["vi"]'
       custom_config: '["#define MIRYOKU_CLIPBOARD_FUN"]'
       kconfig: '["CONFIG_ZMK_POINTING=y/nCONFIG_ZMK_KSCAN_DEBOUNCE_PRESS_MS=15/nCONFIG_ZMK_KSCAN_DEBOUNCE_RELEASE_MS=15"]'
+      branches: '["zmkfirmware/zmk/v0.3"]'
