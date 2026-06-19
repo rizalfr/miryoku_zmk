@@ -1,0 +1,13 @@
+/*
+ * Use Corne's 5-column physical layout for Miryoku on 3x6 Corne PCBs.
+ *
+ * The physical PCB still has 6 columns per half, but Miryoku uses the inner
+ * 5 columns plus 3 thumbs. Selecting the 5col layout drops the outside columns
+ * in the scan-to-keymap position map so the second physical column starts at Q.
+ */
+
+/ {
+    chosen {
+        zmk,physical-layout = &foostan_corne_5col_layout;
+    };
+};
