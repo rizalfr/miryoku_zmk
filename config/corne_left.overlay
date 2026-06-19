@@ -1,24 +1,16 @@
 /*
- * Drop the ZMK Studio physical layouts on the Corne peripherals.
+ * Keep a single physical layout on the Corne peripherals.
  *
- * The corne_dongle (central) uses a plain `zmk,matrix-transform` with no
- * physical layout. Since ZMK v0.3 the upstream corne shield ships two
- * physical layouts (5col + 6col) for ZMK Studio, which makes ZMK build a
- * canonical position map that does not line up with the dongle's plain
- * transform positions -- so only part of the keys register.
+ * Since ZMK v0.3 the upstream corne shield ships two physical layouts
+ * (5col + 6col) for ZMK Studio. We don't use Studio and Miryoku is built for
+ * the 42-key (6col) mapping, so drop the 5col layout. This leaves a single
+ * layout (6col), which avoids any runtime layout switching to the 36-key 5col
+ * layout (that would silently drop the outer columns). The 6col layout stays
+ * chosen by the upstream corne.dtsi.
  *
- * We don't use ZMK Studio here, so remove the physical layouts and select the
- * matrix transform directly, exactly like corne_dongle.overlay does. Now all
- * three devices report/consume positions 0-41 in the same `default_transform`
- * order.
+ * Note: deleting *all* physical layouts and selecting zmk,matrix-transform
+ * directly does not build on the half shields in v0.3 (the keymap binds to a
+ * physical layout), so we keep exactly one.
  */
 
-/ {
-    chosen {
-        /delete-property/ zmk,physical-layout;
-        zmk,matrix-transform = &default_transform;
-    };
-};
-
 /delete-node/ &foostan_corne_5col_layout;
-/delete-node/ &foostan_corne_6col_layout;
