@@ -1,0 +1,24 @@
+/*
+ * Drop the ZMK Studio physical layouts on the Corne peripherals.
+ *
+ * The corne_dongle (central) uses a plain `zmk,matrix-transform` with no
+ * physical layout. Since ZMK v0.3 the upstream corne shield ships two
+ * physical layouts (5col + 6col) for ZMK Studio, which makes ZMK build a
+ * canonical position map that does not line up with the dongle's plain
+ * transform positions -- so only part of the keys register.
+ *
+ * We don't use ZMK Studio here, so remove the physical layouts and select the
+ * matrix transform directly, exactly like corne_dongle.overlay does. The right
+ * half keeps its `col-offset = <6>` (applied to &default_transform by the
+ * upstream corne_right.overlay), so it still reports columns 6-11.
+ */
+
+/ {
+    chosen {
+        /delete-property/ zmk,physical-layout;
+        zmk,matrix-transform = &default_transform;
+    };
+};
+
+/delete-node/ &foostan_corne_5col_layout;
+/delete-node/ &foostan_corne_6col_layout;
