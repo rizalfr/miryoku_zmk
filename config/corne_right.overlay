@@ -1,4 +1,5 @@
 #include <dt-bindings/zmk/matrix_transform.h>
+#include <physical_layouts.dtsi>
 
 /*
  * Use Corne's 5-column physical layout for Miryoku on 3x6 Corne PCBs.
@@ -6,24 +7,30 @@
  * The physical PCB still has 6 columns per half, but Miryoku uses the inner
  * 5 columns plus 3 thumbs. Selecting the 5col layout drops the outside columns
  * in the scan-to-keymap position map so the second physical column starts at Q.
- */
-
-/*
- * Stock five_column_transform uses columns = 10 with col-offset = 6 for this
- * half. The dropped outer column (raw col 5) then lands at logical column
- * 11, but row * 10 + 11 overflows into the next row's index range (row1's
- * RC(1,1) and row2's RC(2,1)), ghost-pressing "a"/"z" instead of doing
+ *
+ * This can't reuse ZMK's own &foostan_corne_5col_layout / &five_column_transform
+ * by overriding them with "&label { ... };" syntax: this user config overlay is
+ * merged before the upstream shield overlay that defines those labels, so they
+ * don't exist yet at merge time ("undefined node label"). Phandle *values* (like
+ * the chosen below pointed at our own label) resolve fine since those are linked
+ * in a later pass, but "&label { ... };" node amendments need the label to exist
+ * at that point in the merge order -- so the fixed layout/transform here are
+ * defined as brand new local nodes (copy of the upstream 5col geometry) instead
+ * of patches to the upstream ones.
+ *
+ * Stock five_column_transform also uses columns = 10 with col-offset = 6 for
+ * this half. The dropped outer column (raw col 5) then lands at logical
+ * column 11, but row * 10 + 11 overflows into the next row's index range
+ * (row1's RC(1,1) and row2's RC(2,1)), ghost-pressing "a"/"z" instead of doing
  * nothing. Widening columns to 12 gives the dropped column room to land
- * outside any row's valid range. Defined locally (instead of overriding the
- * upstream &five_column_transform label) because that label isn't visible
- * from this overlay at merge time.
+ * outside any row's valid range.
  */
 / {
     chosen {
-        zmk,physical-layout = &foostan_corne_5col_layout;
+        zmk,physical-layout = &corne_5col_fixed_layout;
     };
 
-    five_column_transform_fixed: keymap_transform_fixed {
+    corne_5col_fixed_transform: corne_5col_fixed_transform {
         compatible = "zmk,matrix-transform";
         columns = <12>;
         rows = <4>;
@@ -35,8 +42,49 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10
                         RC(3,3) RC(3,4) RC(3,5)  RC(3,6) RC(3,7) RC(3,8)
         >;
     };
-};
 
-&foostan_corne_5col_layout {
-    transform = <&five_column_transform_fixed>;
+    corne_5col_fixed_layout: corne_5col_fixed_layout {
+        compatible = "zmk,physical-layout";
+        display-name = "5 Column Fixed";
+        transform = <&corne_5col_fixed_transform>;
+
+        keys  //                     w   h    x    y     rot    rx    ry
+            = <&key_physical_attrs 100 100    0   37       0     0     0>
+            , <&key_physical_attrs 100 100  100   12       0     0     0>
+            , <&key_physical_attrs 100 100  200    0       0     0     0>
+            , <&key_physical_attrs 100 100  300   12       0     0     0>
+            , <&key_physical_attrs 100 100  400   24       0     0     0>
+            , <&key_physical_attrs 100 100  700   24       0     0     0>
+            , <&key_physical_attrs 100 100  800   12       0     0     0>
+            , <&key_physical_attrs 100 100  900    0       0     0     0>
+            , <&key_physical_attrs 100 100 1000   12       0     0     0>
+            , <&key_physical_attrs 100 100 1100   37       0     0     0>
+            , <&key_physical_attrs 100 100    0  137       0     0     0>
+            , <&key_physical_attrs 100 100  100  112       0     0     0>
+            , <&key_physical_attrs 100 100  200  100       0     0     0>
+            , <&key_physical_attrs 100 100  300  112       0     0     0>
+            , <&key_physical_attrs 100 100  400  124       0     0     0>
+            , <&key_physical_attrs 100 100  700  124       0     0     0>
+            , <&key_physical_attrs 100 100  800  112       0     0     0>
+            , <&key_physical_attrs 100 100  900  100       0     0     0>
+            , <&key_physical_attrs 100 100 1000  112       0     0     0>
+            , <&key_physical_attrs 100 100 1100  137       0     0     0>
+            , <&key_physical_attrs 100 100    0  237       0     0     0>
+            , <&key_physical_attrs 100 100  100  212       0     0     0>
+            , <&key_physical_attrs 100 100  200  200       0     0     0>
+            , <&key_physical_attrs 100 100  300  212       0     0     0>
+            , <&key_physical_attrs 100 100  400  224       0     0     0>
+            , <&key_physical_attrs 100 100  700  224       0     0     0>
+            , <&key_physical_attrs 100 100  800  212       0     0     0>
+            , <&key_physical_attrs 100 100  900  200       0     0     0>
+            , <&key_physical_attrs 100 100 1000  212       0     0     0>
+            , <&key_physical_attrs 100 100 1100  237       0     0     0>
+            , <&key_physical_attrs 100 100  250  312       0     0     0>
+            , <&key_physical_attrs 100 100  350  312    1200   350   412>
+            , <&key_physical_attrs 100 150  448  283    2400   448   433>
+            , <&key_physical_attrs 100 150  652  283  (-2400)  752   433>
+            , <&key_physical_attrs 100 100  750  312  (-1200)  850   412>
+            , <&key_physical_attrs 100 100  850  312       0     0     0>
+        ;
+    };
 };
