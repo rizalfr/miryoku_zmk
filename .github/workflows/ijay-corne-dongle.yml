@@ -26,3 +26,10 @@ jobs:
       custom_config: '["#define MIRYOKU_CLIPBOARD_FUN"]'
       kconfig: '["CONFIG_ZMK_POINTING=y\nCONFIG_ZMK_KSCAN_DEBOUNCE_PRESS_MS=15\nCONFIG_ZMK_KSCAN_DEBOUNCE_RELEASE_MS=15\nCONFIG_ZMK_SPLIT_ROLE_CENTRAL=y\nCONFIG_ZMK_SLEEP=y"]'
       branches: '["zmkfirmware/zmk/v0.3"]'
+  reset:
+    uses: ./.github/workflows/main.yml
+    secrets: inherit
+    with:
+      board: '["nice_nano_v2", "nrfmicro_13"]'
+      shield: '["settings_reset"]'
+      branches: '["zmkfirmware/zmk/v0.3"]'
