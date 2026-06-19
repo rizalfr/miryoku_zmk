@@ -11,3 +11,16 @@
         zmk,physical-layout = &foostan_corne_5col_layout;
     };
 };
+
+/*
+ * The stock five_column_transform uses columns = 10. The dropped outer
+ * column (raw col 0, col-offset 0) lands at logical column 0, but
+ * row * 10 + 0 overflows into the next row's index range (row1's RC(0,10)
+ * and row2's RC(1,10)), so that switch ghost-presses "p"/the row-above-p key
+ * instead of doing nothing. Widening columns to 12 (matching the 6col
+ * transform's width) gives the dropped column room to land outside any
+ * row's valid range.
+ */
+&five_column_transform {
+    columns = <12>;
+};
