@@ -1,0 +1,17 @@
+# Copyright 2026
+
+name: 'a ijay korba'
+on: workflow_dispatch
+jobs:
+  build:
+    uses: ./.github/workflows/main.yml
+    secrets: inherit
+    with:
+      board: '["nice_nano_v2"]'
+      shield: '["korba_left", "korba_right"]'
+      alphas: '["QWERTY"]'
+      nav: '["vi"]'
+      custom_config: '["#define MIRYOKU_CLIPBOARD_FUN"]'
+      kconfig: '["CONFIG_ZMK_POINTING=y\nCONFIG_ZMK_KSCAN_DEBOUNCE_PRESS_MS=15\nCONFIG_ZMK_KSCAN_DEBOUNCE_RELEASE_MS=15\nCONFIG_ZMK_SLEEP=y"]'
+      branches: '["zmkfirmware/zmk/v0.3"]'
+      modules: '["badjeff/zmk-pmw3610-driver/main"]'

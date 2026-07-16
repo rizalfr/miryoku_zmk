@@ -1,0 +1,13 @@
+if SHIELD_KORBA_LEFT
+
+config ZMK_KEYBOARD_NAME
+    default "Korba"
+
+endif
+
+if SHIELD_KORBA_RIGHT
+
+config ZMK_KEYBOARD_NAME
+    default "Korba"
+
+endif

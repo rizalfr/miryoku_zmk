@@ -1,0 +1,6 @@
+// Copyright 2026
+// SPDX-License-Identifier: MIT
+
+#include "../miryoku/custom_config.h"
+#include "../miryoku/mapping/42/corne.h"
+#include "../miryoku/miryoku.dtsi"

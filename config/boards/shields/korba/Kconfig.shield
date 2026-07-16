@@ -1,0 +1,5 @@
+config SHIELD_KORBA_LEFT
+    def_bool $(shields_list_contains,korba_left)
+
+config SHIELD_KORBA_RIGHT
+    def_bool $(shields_list_contains,korba_right)
